@@ -1,4 +1,4 @@
-package local.mydherin.users.domain.user.entities.rol.vos;
+package local.mydherin.users.domain.rol.vos;
 
 import local.mydherin.users.domain.shared.ValueObject;
 

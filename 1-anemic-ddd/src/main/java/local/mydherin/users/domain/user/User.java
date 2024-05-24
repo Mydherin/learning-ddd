@@ -1,7 +1,7 @@
 package local.mydherin.users.domain.user;
 
+import local.mydherin.users.domain.rol.Rol;
 import local.mydherin.users.domain.shared.AggregateRoot;
-import local.mydherin.users.domain.user.entities.rol.Rol;
 import local.mydherin.users.domain.user.vos.Age;
 import local.mydherin.users.domain.user.vos.DNI;
 import local.mydherin.users.domain.user.vos.Name;

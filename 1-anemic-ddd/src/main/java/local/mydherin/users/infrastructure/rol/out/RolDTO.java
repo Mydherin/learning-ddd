@@ -1,4 +1,4 @@
-package local.mydherin.users.infrastructure.shared.daos.usercore;
+package local.mydherin.users.infrastructure.rol.out;
 
 public class RolDTO {
     private String id;

@@ -1,12 +1,14 @@
 package local.mydherin.users.infrastructure.shared.daos.usercore;
 
+import local.mydherin.users.infrastructure.shared.daos.usercore.entities.UserCoreRolDTO;
+
 public class UserCoreDTO {
     private String id;
     private String dni;
 
-    private RolDTO rol;
+    private UserCoreRolDTO rol;
 
-    public UserCoreDTO(String id, String dni, RolDTO rol) {
+    public UserCoreDTO(String id, String dni, UserCoreRolDTO rol) {
         this.id = id;
         this.dni = dni;
         this.rol = rol;
@@ -20,11 +22,11 @@ public class UserCoreDTO {
         return dni;
     }
 
-    public RolDTO getRol() {
+    public UserCoreRolDTO getRol() {
         return rol;
     }
 
-    public static UserCoreDTO of(String id, String dni, RolDTO rol) {
+    public static UserCoreDTO of(String id, String dni, UserCoreRolDTO rol) {
         return new UserCoreDTO(id, dni, rol);
     }
 

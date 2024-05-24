@@ -1,6 +1,6 @@
 package local.mydherin.users.infrastructure.user.out;
 
-import local.mydherin.users.infrastructure.user.out.entities.rol.UserRolDTO;
+import local.mydherin.users.infrastructure.rol.out.RolDTO;
 
 public class UserDTO {
     private String id;
@@ -9,9 +9,9 @@ public class UserDTO {
 
     private String DNI;
 
-    private UserRolDTO rolDTO;
+    private RolDTO rolDTO;
 
-    private UserDTO(String id, String name, Integer age, String DNI, UserRolDTO rolDTO) {
+    private UserDTO(String id, String name, Integer age, String DNI, RolDTO rolDTO) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -35,11 +35,11 @@ public class UserDTO {
         return DNI;
     }
 
-    public UserRolDTO getRolDTO() {
+    public RolDTO getRolDTO() {
         return rolDTO;
     }
 
-    public static UserDTO of(String id, String name, Integer age, String DNI, UserRolDTO rolDTO) {
+    public static UserDTO of(String id, String name, Integer age, String DNI, RolDTO rolDTO) {
         return new UserDTO(id, name, age, DNI, rolDTO);
     }
 }

@@ -1,10 +1,10 @@
-package local.mydherin.users.domain.user.entities.rol;
+package local.mydherin.users.domain.rol;
 
-import local.mydherin.users.domain.shared.Entity;
-import local.mydherin.users.domain.user.entities.rol.vos.Name;
-import local.mydherin.users.domain.user.entities.rol.vos.RolId;
+import local.mydherin.users.domain.rol.vos.Name;
+import local.mydherin.users.domain.rol.vos.RolId;
+import local.mydherin.users.domain.shared.AggregateRoot;
 
-public class Rol extends Entity {
+public class Rol extends AggregateRoot {
 
     private final RolId id;
     private final Name name;

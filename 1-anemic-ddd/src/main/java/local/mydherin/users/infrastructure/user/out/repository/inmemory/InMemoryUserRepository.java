@@ -3,6 +3,7 @@ package local.mydherin.users.infrastructure.user.out.repository.inmemory;
 import local.mydherin.users.application.user.repository.UserCriteria;
 import local.mydherin.users.application.user.repository.UserRepository;
 import local.mydherin.users.domain.user.User;
+import local.mydherin.users.infrastructure.rol.out.repository.inmemory.RolDTOMapper;
 import local.mydherin.users.infrastructure.shared.daos.userage.UserAgeDTO;
 import local.mydherin.users.infrastructure.shared.daos.userage.inmemory.UserAgeDAO;
 import local.mydherin.users.infrastructure.shared.daos.usercore.UserCoreDTO;
@@ -23,14 +24,14 @@ public class InMemoryUserRepository implements UserRepository {
     private final UserAgeDAO userAgeDAO;
     private final UserCoreDAO userCoreDAO;
     private final UserDTOMapper mapper;
-    private final UserRolDTOMapper rolMapper;
+    private final RolDTOMapper rolMapper;
 
     public InMemoryUserRepository(
             UserNameDAO userNameDAO,
             UserAgeDAO userAgeDAO,
             UserCoreDAO userCoreDAO,
             UserDTOMapper mapper,
-            UserRolDTOMapper rolMapper) {
+            RolDTOMapper rolMapper) {
         this.userNameDAO = userNameDAO;
         this.userAgeDAO = userAgeDAO;
         this.userCoreDAO = userCoreDAO;
