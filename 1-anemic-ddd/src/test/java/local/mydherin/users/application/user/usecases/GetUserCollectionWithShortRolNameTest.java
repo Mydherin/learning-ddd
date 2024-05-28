@@ -3,9 +3,9 @@ package local.mydherin.users.application.user.usecases;
 import local.mydherin.users.application.user.repository.UserRepository;
 import local.mydherin.users.domain.rol.services.IsShort;
 import local.mydherin.users.domain.user.User;
-import local.mydherin.users.shared.motherobject.user.ChrisBrown;
-import local.mydherin.users.shared.motherobject.user.JohnDoe;
-import local.mydherin.users.shared.motherobject.user.Mortadelo;
+import local.mydherin.users.domain.user.vos.UserId;
+import local.mydherin.users.shared.motherobject.user.UserWithAdminRol;
+import local.mydherin.users.shared.motherobject.user.UserWithTontorronRol;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -23,12 +23,12 @@ public class GetUserCollectionWithShortRolNameTest {
     @Autowired
     private GetUserCollectionWithShortRolName getUserCollectionWithShortRolName;
     @Test
-    void return_a_list_of_users_with_short_rol_name_when_it_is_executed_given_users_with_short_and_long_rol_names()
+    void return_a_list_of_users_with_short_rol_name_given_users_with_short_and_long_rol_names()
     {
         // Arrange
-        final User johnDoe = JohnDoe.make();
-        final User chrisBrown = ChrisBrown.make();
-        final List<User> users = Arrays.asList(johnDoe, chrisBrown);
+        final var userWithTontorronRol = UserWithTontorronRol.make(UserId.of("1"));
+        final var userWithAdminRol = UserWithAdminRol.make(UserId.of("2"));
+        final List<User> users = Arrays.asList(userWithTontorronRol, userWithAdminRol);
         Mockito.when(userRepository.findBy(null)).thenReturn(users);
 
         // Act
@@ -41,12 +41,12 @@ public class GetUserCollectionWithShortRolNameTest {
     }
 
     @Test
-    void return_an_empty_list_of_users_when_it_is_executed_given_users_with_only_long_rol_names()
+    void return_an_empty_list_of_users_given_users_with_only_long_rol_names()
     {
         // Arrange
-        final User chrisBrown = ChrisBrown.make();
-        final User mortadelo = Mortadelo.make();
-        final List<User> users = Arrays.asList(mortadelo, chrisBrown);
+        final var userWithTonrronRol1 = UserWithTontorronRol.make(UserId.of("1"));
+        final var userWithTonrronRol2 = UserWithTontorronRol.make(UserId.of("2"));
+        final List<User> users = Arrays.asList(userWithTonrronRol1, userWithTonrronRol2);
         Mockito.when(userRepository.findBy(null)).thenReturn(users);
 
         // Act

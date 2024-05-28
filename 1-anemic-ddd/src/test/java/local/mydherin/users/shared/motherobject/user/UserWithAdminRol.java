@@ -7,14 +7,14 @@ import local.mydherin.users.domain.user.vos.Name;
 import local.mydherin.users.domain.user.vos.UserId;
 import local.mydherin.users.shared.motherobject.rol.Admin;
 
-public class JohnDoe {
-    public static User make()
+public class UserWithAdminRol {
+    public static User make(UserId userId)
     {
         return User.of(
-            UserId.of("1"),
-            Name.of("John Doe"),
-            Age.of(27),
-            DNI.of("99999999A"),
+            userId,
+            Name.of("User with rol admin " + userId.getValue()),
+            Age.of(25),
+            DNI.of("10000000Z"),
             Admin.make()
         );
     }

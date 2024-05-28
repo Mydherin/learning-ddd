@@ -7,13 +7,13 @@ import local.mydherin.users.domain.user.vos.Name;
 import local.mydherin.users.domain.user.vos.UserId;
 import local.mydherin.users.shared.motherobject.rol.Tontorron;
 
-public class Mortadelo {
-    public static User make()
+public class AnyUser {
+    public static User make(UserId userId)
     {
         return User.of(
-                UserId.of("3"),
-                Name.of("Mortadelo"),
-                Age.of(37),
+                userId,
+                Name.of("Any user " + userId.getValue()),
+                Age.of(25),
                 DNI.of("10000000Z"),
                 Tontorron.make()
         );

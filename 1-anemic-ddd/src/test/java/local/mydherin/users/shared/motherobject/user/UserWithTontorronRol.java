@@ -5,16 +5,17 @@ import local.mydherin.users.domain.user.vos.Age;
 import local.mydherin.users.domain.user.vos.DNI;
 import local.mydherin.users.domain.user.vos.Name;
 import local.mydherin.users.domain.user.vos.UserId;
+import local.mydherin.users.shared.motherobject.rol.Admin;
 import local.mydherin.users.shared.motherobject.rol.Tontorron;
 
-public class ChrisBrown {
-    public static User make()
+public class UserWithTontorronRol {
+    public static User make(UserId userId)
     {
         return User.of(
-                UserId.of("2"),
-                Name.of("Chris Brown"),
-                Age.of(56),
-                DNI.of("00000000Z"),
+                userId,
+                Name.of("User with rol tontorron " + userId.getValue()),
+                Age.of(25),
+                DNI.of("10000000Z"),
                 Tontorron.make()
         );
     }
