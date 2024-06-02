@@ -1,13 +1,18 @@
 package local.mydherin.users.infrastructure.game.in;
 
+import local.mydherin.users.infrastructure.game.in.entities.saga.SagaDTO;
+
 import java.io.Serializable;
+import java.util.List;
 
 public final class GameDTO implements Serializable {
     private final String gameId;
+    private final List<SagaDTO> saga;
 
-    private GameDTO(String gameId)
+    private GameDTO(String gameId, List<SagaDTO> saga)
     {
         this.gameId = gameId;
+        this.saga = saga;
     }
 
     public String getGameId()
@@ -15,8 +20,13 @@ public final class GameDTO implements Serializable {
         return gameId;
     }
 
-    public static GameDTO of(String gameId)
+    public List<SagaDTO> getSaga()
     {
-        return new GameDTO(gameId);
+        return saga;
+    }
+
+    public static GameDTO of(String gameId, List<SagaDTO> saga)
+    {
+        return new GameDTO(gameId, saga);
     }
 }
