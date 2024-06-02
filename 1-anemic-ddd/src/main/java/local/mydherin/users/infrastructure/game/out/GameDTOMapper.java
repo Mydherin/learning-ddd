@@ -13,7 +13,9 @@ public final class GameDTOMapper {
         return gameDTOList
                 .stream()
                 .map(gameDTO -> Game.of(
-                        GameId.of(gameDTO.getGameId()))
+                        GameId.of(gameDTO.getGameId()),
+                        List.of()
+                    )
                 )
                 .toList();
     }
