@@ -3,17 +3,17 @@ package local.mydherin.users.infrastructure.game.in.entities.saga;
 import java.io.Serializable;
 
 public final class SagaDTO implements Serializable {
-    private final String gameId;
-    private SagaDTO(String gameId)
+    private final String sagaId;
+    private SagaDTO(String sagaId)
     {
-        this.gameId = gameId;
+        this.sagaId = sagaId;
     }
-    public String getGameId() {
-        return gameId;
+    public String getSagaId() {
+        return sagaId;
     }
 
-    public static SagaDTO of(String gameId)
+    public static SagaDTO of(String sagaId)
     {
-        return new SagaDTO(gameId);
+        return new SagaDTO(sagaId);
     }
 }
