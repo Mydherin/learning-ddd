@@ -9,7 +9,7 @@ public final class SagaDTO implements Serializable {
         this.sagaId = sagaId;
     }
 
-    public String getSagaId() {
+    public String getGameId() {
         return sagaId;
     }
 
