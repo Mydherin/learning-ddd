@@ -3,56 +3,84 @@ package local.mydherin.users.application.user.usecases;
 import local.mydherin.users.application.user.repository.UserRepository;
 import local.mydherin.users.domain.rol.services.IsShort;
 import local.mydherin.users.domain.user.User;
-import local.mydherin.users.domain.user.vos.UserId;
-import local.mydherin.users.shared.motherobject.user.UserWithAdminRol;
-import local.mydherin.users.shared.motherobject.user.UserWithTontorronRol;
+import local.mydherin.users.domain.user.services.FilterByShortRolName;
+import local.mydherin.users.shared.motherobject.UserMother;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class GetUserCollectionWithShortRolNameTest {
-    @MockBean
+    @Mock
     private UserRepository userRepository;
-    @Autowired
     private GetUserCollectionWithShortRolName getUserCollectionWithShortRolName;
+    @BeforeEach
+    public void setUp() {
+        getUserCollectionWithShortRolName = new GetUserCollectionWithShortRolName(
+                userRepository,
+                new FilterByShortRolName(new IsShort())
+        );
+    }
     @Test
     void return_a_list_of_users_with_short_rol_name_given_users_with_short_and_long_rol_names()
     {
-        // Arrange
-        final var userWithTontorronRol = UserWithTontorronRol.make(UserId.of("1"));
-        final var userWithAdminRol = UserWithAdminRol.make(UserId.of("2"));
-        final List<User> users = Arrays.asList(userWithTontorronRol, userWithAdminRol);
-        Mockito.when(userRepository.findBy(null)).thenReturn(users);
+        // Given
+        final List<User> userList = givenAListOfUsersWithLongAndShortRolNames();
+        Mockito.when(userRepository.findBy(null)).thenReturn(userList);
 
-        // Act
+        // When
         final List<User> result = getUserCollectionWithShortRolName.execute();
 
-        // Assert
-        result.forEach(user -> {
-            Assertions.assertTrue(user.getRol().getName().isShorterThan(IsShort.SHORT_NAME_LENGTH));
-        });
+        // Then
+        thenAllUsersHaveShortRolName(result);
     }
 
     @Test
     void return_an_empty_list_of_users_given_users_with_only_long_rol_names()
     {
-        // Arrange
-        final var userWithTonrronRol1 = UserWithTontorronRol.make(UserId.of("1"));
-        final var userWithTonrronRol2 = UserWithTontorronRol.make(UserId.of("2"));
-        final List<User> users = Arrays.asList(userWithTonrronRol1, userWithTonrronRol2);
-        Mockito.when(userRepository.findBy(null)).thenReturn(users);
+        // Given
+        final List<User> userList = givenAListOfUsersWithOnlyLongRolNames();
+        Mockito.when(userRepository.findBy(null)).thenReturn(userList);
 
-        // Act
+        // When
         final List<User> result = getUserCollectionWithShortRolName.execute();
 
-        // Assert
-        Assertions.assertTrue(result.isEmpty());
+        // Then
+        thenTheListOfUsersIsEmpty(result);
+    }
+
+    private List<User> givenAListOfUsersWithLongAndShortRolNames()
+    {
+        return Arrays.asList(
+                UserMother.getUserWithAdminRol(),
+                UserMother.getUserWithTontorronRol()
+        );
+    }
+
+    private List<User> givenAListOfUsersWithOnlyLongRolNames()
+    {
+        return Arrays.asList(
+                UserMother.getUserWithTontorronRol(),
+                UserMother.getUserWithTontorronRol()
+        );
+    }
+
+    private void thenAllUsersHaveShortRolName(List<User> userList)
+    {
+        userList.forEach(user -> {
+            Assertions.assertTrue(user.getRol().getName().isShorterThan(IsShort.SHORT_NAME_LENGTH));
+        });
+    }
+
+    private void thenTheListOfUsersIsEmpty(List<User> userList)
+    {
+        Assertions.assertTrue(userList.isEmpty());
     }
 }

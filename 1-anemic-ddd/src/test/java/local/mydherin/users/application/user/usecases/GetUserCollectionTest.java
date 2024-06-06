@@ -2,41 +2,56 @@ package local.mydherin.users.application.user.usecases;
 
 import local.mydherin.users.application.user.repository.UserRepository;
 import local.mydherin.users.domain.user.User;
-import local.mydherin.users.domain.user.vos.UserId;
-import local.mydherin.users.shared.motherobject.user.AnyUser;
-import org.junit.jupiter.api.Assertions;
+import local.mydherin.users.shared.motherobject.UserMother;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
 
-@SpringBootTest
-public class GetUserCollectionTest {
-    @MockBean
-    private UserRepository userRepository;
-    @Autowired
-    private GetUserCollection getUserCollection;
-    @Test
-    void return_a_list_of_users()
-    {
-        // Arrange
-        final var userId1 = "1";
-        final var userId2 = "2";
-        final var user1 = AnyUser.make(UserId.of(userId1));
-        final var user2 = AnyUser.make(UserId.of(userId2));
-        final List<User> users = Arrays.asList(user1, user2);
-        Mockito.when(userRepository.findBy(null)).thenReturn(users);
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-        // Act
+@ExtendWith(MockitoExtension.class)
+public final class GetUserCollectionTest {
+    @Mock
+    private UserRepository userRepository;
+    private GetUserCollection getUserCollection;
+    @BeforeEach
+    public void setUp() {
+        getUserCollection = new GetUserCollection(
+                userRepository
+        );
+    }
+    @Test
+    void user_repository_works_properly()
+    {
+        // Given
+        final List<User> standardUserList = givenAListOfStandardUsers();
+        when(userRepository.findBy(null)).thenReturn(standardUserList);
+
+        // When
         final List<User> result = getUserCollection.execute();
 
-        // Assert
-        Assertions.assertEquals(2, result.size());
-        Assertions.assertEquals(userId1, result.get(0).getId().getValue());
-        Assertions.assertEquals(userId2, result.get(1).getId().getValue());
+        // Then
+        thenUserRepositoryWorksProperly(standardUserList, result);
+    }
+
+    private List<User> givenAListOfStandardUsers()
+    {
+        return Arrays.asList(
+                UserMother.getStandardUser(),
+                UserMother.getStandardUser()
+        );
+    }
+
+    private void thenUserRepositoryWorksProperly(final List<User> expected, final List<User> result)
+    {
+        assertEquals(expected, result);
+        verify(userRepository).findBy(null);
     }
 }
