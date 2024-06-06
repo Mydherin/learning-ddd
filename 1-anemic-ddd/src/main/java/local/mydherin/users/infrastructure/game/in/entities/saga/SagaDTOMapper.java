@@ -11,7 +11,7 @@ public final class SagaDTOMapper {
     {
         return sagaList
                 .stream()
-                .map(saga -> SagaDTO.of(saga.getSagaId().getValue(), saga.getGameId().getValue()))
+                .map(saga -> SagaDTO.of(saga.getSagaId().getValue()))
                 .toList();
     }
 }
