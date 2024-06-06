@@ -2,6 +2,7 @@ package local.mydherin.users.infrastructure.game.out.entities.saga;
 
 import local.mydherin.users.domain.game.entities.saga.Saga;
 import local.mydherin.users.domain.game.entities.saga.vos.GameId;
+import local.mydherin.users.domain.game.entities.saga.vos.RelatedGameId;
 import local.mydherin.users.domain.game.entities.saga.vos.SagaId;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ public final class SagaDTOMapper {
     {
         return sagaDTOList
                 .stream()
-                .map(sagaDTO -> SagaDTO.of(sagaDTO.getSagaId(), sagaDTO.getGameId()))
+                .map(sagaDTO -> SagaDTO.of(sagaDTO.getSagaId(), sagaDTO.getGameId(), sagaDTO.getRelatedGameId()))
                 .toList();
     }
 
@@ -21,7 +22,7 @@ public final class SagaDTOMapper {
     {
         return sagaDTOList
                 .stream()
-                .map(sagaDTO -> Saga.of(SagaId.of(sagaDTO.getSagaId()), GameId.of(sagaDTO.getGameId())))
+                .map(sagaDTO -> Saga.of(SagaId.of(sagaDTO.getSagaId()), GameId.of(sagaDTO.getGameId()), RelatedGameId.of(sagaDTO.getRelatedGameId())))
                 .toList();
     }
 }

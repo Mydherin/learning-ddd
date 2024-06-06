@@ -3,10 +3,12 @@ package local.mydherin.users.infrastructure.game.out.entities.saga;
 public final class SagaDTO {
     private final String sagaId;
     private final String gameId;
-    public SagaDTO(String sagaId, String gameId)
+    private final String relatedGameId;
+    public SagaDTO(String sagaId, String gameId, String relatedGameId)
     {
         this.sagaId = sagaId;
         this.gameId = gameId;
+        this.relatedGameId = relatedGameId;
     }
     public String getSagaId()
     {
@@ -16,8 +18,12 @@ public final class SagaDTO {
     {
         return gameId;
     }
-    public static SagaDTO of(String sagaId, String gameId)
+    public String getRelatedGameId()
     {
-        return new SagaDTO(sagaId, gameId);
+        return relatedGameId;
+    }
+    public static SagaDTO of(String sagaId, String gameId, String relatedGameId)
+    {
+        return new SagaDTO(sagaId, gameId, relatedGameId);
     }
 }

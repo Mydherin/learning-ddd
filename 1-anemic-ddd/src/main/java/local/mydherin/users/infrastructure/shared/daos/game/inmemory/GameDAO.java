@@ -12,18 +12,18 @@ public final class GameDAO {
     {
         return List.of(
             new GameDTO("1", List.of(
-                    new SagaDTO("2", "1"),
-                    new SagaDTO("3", "1"),
-                    new SagaDTO("4", "1")
+                    new SagaDTO("1", "1", "2"),
+                    new SagaDTO("2", "1", "3"),
+                    new SagaDTO("3", "1", "4")
             )),
             new GameDTO("2", List.of(
-                    new SagaDTO("1", "2")
+                    new SagaDTO("4", "2", "1")
             )),
             new GameDTO("3", List.of(
-                    new SagaDTO("1", "3")
+                    new SagaDTO("5", "3", "1")
             )),
             new GameDTO("4", List.of(
-                    new SagaDTO("1", "4")
+                    new SagaDTO("6", "4", "1")
             ))
         );
     }
