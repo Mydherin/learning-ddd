@@ -4,20 +4,13 @@ import local.mydherin.users.domain.game.entities.saga.Saga;
 import local.mydherin.users.domain.game.entities.saga.vos.GameId;
 import local.mydherin.users.domain.game.entities.saga.vos.RelatedGameId;
 import local.mydherin.users.domain.game.entities.saga.vos.SagaId;
+import local.mydherin.users.infrastructure.shared.daos.game.entities.SagaDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public final class SagaDTOMapper {
-    public List<SagaDTO> fromSharedDTO(final List<local.mydherin.users.infrastructure.shared.daos.game.entities.SagaDTO> sagaDTOList)
-    {
-        return sagaDTOList
-                .stream()
-                .map(sagaDTO -> SagaDTO.of(sagaDTO.getSagaId(), sagaDTO.getGameId(), sagaDTO.getRelatedGameId()))
-                .toList();
-    }
-
     public List<Saga> toDomain(final List<SagaDTO> sagaDTOList)
     {
         return sagaDTOList

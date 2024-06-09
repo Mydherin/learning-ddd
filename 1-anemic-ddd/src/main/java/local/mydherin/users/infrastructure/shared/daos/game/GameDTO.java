@@ -14,7 +14,7 @@ public final class GameDTO {
     public String getGameId() {
         return gameId;
     }
-    public List<SagaDTO> getSagaDtoList() {
+    public List<SagaDTO> getSagaDTOList() {
         return sagaDTOList;
     }
 }
